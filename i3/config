@@ -442,7 +442,7 @@ bindsym $mod+Shift+t exec thunar
 exec_always --no-startup-id feh --randomize --bg-scale ~/Pictures/wallpapers/*
 exec_always --no-startup-id setxkbmap -layout pt
 exec_always --no-startup-id setxkbmap -option caps:none
-
+exec_always --no-startup-id dunst &
 
 
 # Pulse Audio controls

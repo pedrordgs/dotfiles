@@ -5,15 +5,11 @@
   export ZSH="/home/pedro/.oh-my-zsh"
 
 
-
-autoload -U promptinit; promptinit
-prompt spaceship
-
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="spaceship"
+ZSH_THEME="robbyrussell"
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
@@ -66,6 +62,7 @@ ZSH_THEME="spaceship"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+
 plugins=(
   git
   colored-man-pages
@@ -115,7 +112,6 @@ alias st='speed-test'
 alias meteo=weather
 alias dot='cd ~/dotfiles'
 alias ls='exa'
-alias br='broot'
 alias rservices='sudo systemctl list-units --type=service --state=running'
 
 function weather() {
@@ -128,4 +124,43 @@ pfetch
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 
+
+source /home/pedro/.config/broot/launcher/bash/br
+
+
+
+
+
+
+#enable vim mode on commmand line
+bindkey -v
+
+# no delay entering normal mode
+# https://coderwall.com/p/h63etq
+# https://github.com/pda/dotzsh/blob/master/keyboard.zsh#L10
+# 10ms for key sequences
+KEYTIMEOUT=1
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+
+
+function zle-line-init zle-keymap-select {
+VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]% %{$reset_color%}"
+RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}"
+RPS2=$RPS1
+zle reset-prompt
+}
+
+# add missing vim hotkeys
+# http://zshwiki.org/home/zle/vi-mode
+bindkey -a u undo
+bindkey -a '^T' redo
+bindkey '^?' backward-delete-char  #backspace
+
+# history search in vim mode
+# http://zshwiki.org./home/zle/bindkeys#why_isn_t_control-r_working_anymore
+# ctrl+r to search history
+bindkey -M viins '^r' history-incremental-search-backward
+bindkey -M vicmd '^r' history-incremental-search-backward
 
