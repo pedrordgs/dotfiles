@@ -1,0 +1,13 @@
+[user]
+	email = pedrombr99@gmail.com
+  name = pedrordgs
+
+[alias]
+  a = add
+  c = commit
+  cl = clone
+  p = push
+  conflicts = diff --name-only --diff-filter=U
+
+[core]
+	editor = nvim
