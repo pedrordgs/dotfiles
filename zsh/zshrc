@@ -103,9 +103,9 @@ alias so='cd ~/miei/2ano/so'
 alias li4='cd ~/miei/3ano/li4'
 alias cg='cd ~/miei/3ano/cg'
 alias pl='cd ~/miei/3ano/pl'
+alias srcr='cd ~/miei/3ano/srcr'
 alias ghci='stack ghci'
 alias ghc='stack ghc'
-alias vim='nvim'
 alias p='sudo pacman'
 alias cat='bat'
 alias st='speed-test'
@@ -113,6 +113,12 @@ alias meteo=weather
 alias dot='cd ~/dotfiles'
 alias ls='exa'
 alias rservices='sudo systemctl list-units --type=service --state=running'
+alias prolog='swipl'
+alias vim='nvim'
+alias ts='tmux list-sessions'
+alias tk='tmux kill-session -t'
+alias ta='tmux attach -t'
+alias tka='tmux kill-server'
 
 function weather() {
   curl 'wttr.in/~'${1:-Braga}'+'$2'?'${3:-0}
@@ -126,7 +132,7 @@ pfetch
 
 
 source /home/pedro/.config/broot/launcher/bash/br
-
+export PATH=$PATH:~/.scripts
 
 
 

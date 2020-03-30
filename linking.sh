@@ -15,3 +15,6 @@ ln -sf ~/dotfiles/rofi/themes ~/.config/rofi/themes
 ln -sf ~/dotfiles/git/gitconfig ~/.gitconfig
 ln -sf ~/dotfiles/kitty/kitty.conf ~/.config/kitty/kitty.conf
 ln -sf ~/dotfiles/kitty/themes/Sundried.conf ~/.config/kitty/themes/Sundried.conf
+ln -sf ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
+ln -sf ~/dotfiles/termite/config ~/.config/termite/config
+ln -sf ~/dotfiles/picom/picom.conf ~/.config/picom/picom.conf
