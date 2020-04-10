@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]
+  then
+    echo "No arguments supplied"
+    exit
+fi
+
+NAME=$(echo "$1" | cut -d '.' -f1)
+EXT=$(echo "$1" | cut -d '.' -f2)
+
+if [ $EXT = "l" ]
+  then
+    echo "flex $1"
+    flex $1
+    echo "gcc -Wall lex.yy.c -o $NAME"
+    gcc -Wall lex.yy.c -o $NAME
+  else
+    echo "File format not suported"
+fi
+

@@ -3,7 +3,6 @@
 ln -sf ~/dotfiles/i3/config ~/.i3/config
 ln -sf ~/dotfiles/i3/config ~/.config/i3/config
 ln -sf ~/dotfiles/zsh/zshrc ~/.zshrc
-ln -sf ~/dotfiles/nvim/vimrc ~/.vimrc
 ln -sf ~/dotfiles/polybar ~/.config/polybar
 ln -sf ~/dotfiles/nvim/init.vim ~/.config/nvim/init.vim
 ln -sf ~/dotfiles/ranger/rc.conf ~/.config/ranger/rc.conf

@@ -119,6 +119,7 @@ alias ts='tmux list-sessions'
 alias tk='tmux kill-session -t'
 alias ta='tmux attach -t'
 alias tka='tmux kill-server'
+alias help='tldr'
 
 function weather() {
   curl 'wttr.in/~'${1:-Braga}'+'$2'?'${3:-0}

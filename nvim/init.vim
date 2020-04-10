@@ -53,7 +53,6 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
 Plugin 'dag/vim2hs'
 Plugin 'cool.vim'
-
 Plugin 'drtom/fsharp-vim'
 
 call vundle#end()
@@ -90,7 +89,7 @@ set autoindent smartindent      " auto/smart indent
 set copyindent                  " copy previous indentation on auto indent
 set softtabstop=2               " Tab key results in # spaces
 set tabstop=2                   " Tab is # spaces
-set shiftwidth=4                " The # of spaces for indenting.
+set shiftwidth=2                " The # of spaces for indenting.
 set smarttab                    " At start of line, <Tab> inserts shift width
 
 set statusline+=%#warningmsg#
@@ -185,6 +184,10 @@ map <C-z> :NERDTreeToggle<CR>
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+
+
 
 " Unbind arrow keys
 noremap <Up> <Nop>
@@ -220,3 +223,18 @@ autocmd FileType tex map <F10> :silent !pdflatex % && start %:r.pdf<CR>
 autocmd FileType tex inoremap ,em \emph{}<++><Esc>T{i
 autocmd FileType tex inoremap ,bf \textbf{}<++><Esc>T{i
 autocmd FileType tex inoremap ,it \textit{}<++><Esc>T{i
+
+
+" Define flex filetype
+augroup twig_ft
+  au!
+  autocmd BufNewFile,BufRead *.fl   set filetype=lex
+augroup END
+
+" Define prolog filetype
+augroup twig_ft
+  au!
+  autocmd BufNewFile,BufRead *.pl   set filetype=prolog
+augroup END
+
+

@@ -438,8 +438,6 @@ exec --no-startup-id i3-msg 'workspace $ws1; exec termite'
 exec --no-startup-id i3-msg 'workspace $ws3; exec firefox'
 exec --no-startup-id i3-msg 'workspace $ws6; exec spotify'
 exec --no-startup-id i3-msg 'workspace $ws7; exec discord'
-exec_always xinput set-prop 14 325 1
-exec_always xinput set-prop 14 307 1
 
 bindsym $mod+Shift+f exec --no-startup-id firefox
 bindsym $mod+Shift+d exec --no-startup-id discord
@@ -449,7 +447,7 @@ exec_always --no-startup-id feh --randomize --bg-scale ~/Pictures/wallpapers/*
 exec_always --no-startup-id setxkbmap -layout pt
 exec_always --no-startup-id setxkbmap -option caps:none
 exec_always --no-startup-id dunst
-
+exec_always --no-startup-id ~/.scripts/touchpad.sh
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
