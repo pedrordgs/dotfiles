@@ -48,3 +48,5 @@ sudo pacman -S ttf-ionicons --needed --noconfirm
 echo "Installing Font Awesome"
 sudo pacman -S ttf-font-awesome --needed --noconfirm
 
+# cp scripts dir to $HOME
+cp scripts ~/.scripts
