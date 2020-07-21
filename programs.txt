@@ -1,0 +1,16 @@
+networkmanager
+alsa
+pulseaudio
+compton
+dunst
+scrot
+firefox
+spotify
+polybar
+i3gaps
+termite
+discord
+thunar
+feh
+light
+rofi
