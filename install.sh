@@ -7,6 +7,8 @@ declare -a ignore_list=(".git"
                         "scripts"
                     )
 
+sudo pacman -S stow
+
 # go throw all files except ignore list
 for file in ~/.dotfiles/*; do
   if [ -d ${file} ] && [[ ! ${file} =~ ${ignore_list[@]} ]]; then
@@ -30,15 +32,13 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 # zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
-# change shell to zsh
-chsh -s $(which zsh)
 
 # install all dependencies
-while read line;
-do
-    echo "Installing $line"
-    sudo pacman -S $line --needed --noconfirm
-done
+# while read line;
+# do
+#     echo "Installing $line"
+#     sudo pacman -S $line --needed --noconfirm
+# done
 
 # install fonts
 echo "Installing Cascadia Code"
@@ -49,4 +49,7 @@ echo "Installing Font Awesome"
 sudo pacman -S ttf-font-awesome --needed --noconfirm
 
 # cp scripts dir to $HOME
-cp scripts ~/.scripts
+cp -r scripts ~/.scripts
+
+# change shell to zsh
+chsh -s $(which zsh)
