@@ -16,3 +16,6 @@ pfetch
 stack
 exa
 tldr
+zathura
+libreoffice
+brave

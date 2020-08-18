@@ -1,5 +1,5 @@
 ! Rofi config file
-rofi.theme: ~/dotfiles/rofi/themes/onedark.rasi
+rofi.theme: ~/.config/rofi/themes/onedark.rasi
 rofi.modi:           drun,window,run
 rofi.combi-modi:     drun,window
 rofi.display-window: Window
