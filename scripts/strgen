@@ -1,0 +1,13 @@
+#!/bin/bash
+
+case $# in
+  1)
+    </dev/urandom tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_`{|}~' | head -c $1 | tee /dev/tty | xclip -sel clip
+    ;;
+  2)
+    </dev/urandom tr -dc $1 | head -c $2 | tee /dev/tty | xclip -sel clip
+    ;;
+  *)
+    echo "Wrong arguments"
+    ;;
+esac

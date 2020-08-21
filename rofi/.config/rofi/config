@@ -5,5 +5,5 @@ rofi.combi-modi:     drun,window
 rofi.display-window: Window
 rofi.display-drun:   Search
 rofi.show-icons:     true
-rofi.font:           Cascadia Code 16
+rofi.font:           Iosevka 16
 rofi.lines:          10
