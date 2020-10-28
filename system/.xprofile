@@ -1,6 +1,0 @@
-#!/bin/sh
-
-dunst &         # norification
-xset r rate 300 50 & # speed xrate up
-unclutter &     # remove mouse when idle
-~/.scripts/touchpad.sh # enable natural scrolling and tapping

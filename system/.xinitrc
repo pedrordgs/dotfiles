@@ -1,4 +1,3 @@
 #!/bin/sh
 
-. ~/.xprofile
-exec i3
+bspwm

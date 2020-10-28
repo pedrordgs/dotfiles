@@ -1,6 +1,127 @@
+export ZSH="/home/pbr/.oh-my-zsh"
+
+ZSH_THEME="spaceship"
+
+plugins=(git)
+
+source $ZSH/oh-my-zsh.sh
+
+# Plugins
+
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# ssh
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
+
+
+# Functional alias
+alias ghci='stack ghci'
+alias ghc='stack ghc'
+alias p='sudo pacman'
+alias cat='bat'
+alias st='speed-test'
+alias meteo=weather
+alias dot='cd ~/.dotfiles'
+alias ls='exa'
+alias rservices='sudo systemctl list-units --type=service --state=running'
+alias vim='nvim'
+alias ts='tmux list-sessions'
+alias tk='tmux kill-session -t'
+alias ta='tmux attach -t'
+alias tka='tmux kill-server'
+alias help='tldr'
+alias grep='grep --color=auto'
+
+alias sonarqube='~/Downloads/sonarqube-8.5.0.37579/bin/linux-x86-64/sonar.sh console'
+alias electrum='java -jar ~/Downloads/electrum-2.1.rc5.jar'
+
+# Work alias
+alias dip='cd ~/work/dipcode'
+
+function weather() {
+  curl 'wttr.in/~'${1:-Braga}'+'$2'?'${3:-0}
+}
+
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+#
+
+
+export PATH=$PATH:~/.local/bin
+
+
+
+
+
+#enable vim mode on commmand line
+bindkey -v
+export KEYTIMEOUT=1
+
+
+# basic tab complete
+autoload -U compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit
+_comp_options+=(globdots)		# Include hidden files.
+
+# vim bindkeys
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -v '^?' backward-delete-char
+bindkey -a u undo
+bindkey -a '^T' redo
+
+function zle-keymap-select {
+  if [[ ${KEYMAP} == vicmd ]] ||
+     [[ $1 = 'block' ]]; then
+    echo -ne '\e[1 q'
+  elif [[ ${KEYMAP} == main ]] ||
+       [[ ${KEYMAP} == viins ]] ||
+       [[ ${KEYMAP} = '' ]] ||
+       [[ $1 = 'beam' ]]; then
+    echo -ne '\e[5 q'
+  fi
+}
+
+zle -N zle-keymap-select
+
+zle-line-init() {
+    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+    echo -ne "\e[5 q"
+}
+zle -N zle-line-init
+echo -ne '\e[5 q' # Use beam shape cursor on startup.
+preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+
+
+
+
+
 # Load spaceship prompt
 autoload -U promptinit; promptinit
-prompt spaceship
+# prompt spaceship
 
 SPACESHIP_PROMPT_ORDER=(
   exit_code     # Exit code section
@@ -65,118 +186,3 @@ SPACESHIP_DIR_PREFIX=
 SPACESHIP_EXIT_CODE_SHOW=true
 
 SPACESHIP_EXEC_TIME_SHOW=false
-
-# Plugins
-
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# alias CP='cd ~/miei/2ano/cp'
-# alias so='cd ~/miei/2ano/so'
-# alias li4='cd ~/miei/3ano/li4'
-# alias cg='cd ~/miei/3ano/cg'
-# alias pl='cd ~/miei/3ano/pl'
-# alias srcr='cd ~/miei/3ano/srcr'
-
-
-# Functional alias
-alias ghci='stack ghci'
-alias ghc='stack ghc'
-alias p='sudo pacman'
-alias cat='bat'
-alias st='speed-test'
-alias meteo=weather
-alias dot='cd ~/.dotfiles'
-alias ls='exa'
-alias rservices='sudo systemctl list-units --type=service --state=running'
-alias vim='nvim'
-alias ts='tmux list-sessions'
-alias tk='tmux kill-session -t'
-alias ta='tmux attach -t'
-alias tka='tmux kill-server'
-alias help='tldr'
-alias grep='grep --color=auto'
-
-
-# Work alias
-alias dip='cd ~/work/dipcode'
-
-function weather() {
-  curl 'wttr.in/~'${1:-Braga}'+'$2'?'${3:-0}
-}
-
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-#
-
-
-source /home/pedro/.config/broot/launcher/bash/br
-export PATH=$PATH:~/.scripts
-
-
-
-
-
-#enable vim mode on commmand line
-bindkey -v
-export KEYTIMEOUT=1
-
-
-# basic tab complete
-autoload -U compinit
-zstyle ':completion:*' menu select
-zmodload zsh/complist
-compinit
-_comp_options+=(globdots)		# Include hidden files.
-
-# vim bindkeys
-bindkey -M menuselect 'h' vi-backward-char
-bindkey -M menuselect 'k' vi-up-line-or-history
-bindkey -M menuselect 'l' vi-forward-char
-bindkey -M menuselect 'j' vi-down-line-or-history
-bindkey -v '^?' backward-delete-char
-bindkey -a u undo
-bindkey -a '^T' redo
-
-function zle-keymap-select {
-  if [[ ${KEYMAP} == vicmd ]] ||
-     [[ $1 = 'block' ]]; then
-    echo -ne '\e[1 q'
-  elif [[ ${KEYMAP} == main ]] ||
-       [[ ${KEYMAP} == viins ]] ||
-       [[ ${KEYMAP} = '' ]] ||
-       [[ $1 = 'beam' ]]; then
-    echo -ne '\e[5 q'
-  fi
-}
-
-zle -N zle-keymap-select
-
-zle-line-init() {
-    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
-    echo -ne "\e[5 q"
-}
-zle -N zle-line-init
-echo -ne '\e[5 q' # Use beam shape cursor on startup.
-preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.

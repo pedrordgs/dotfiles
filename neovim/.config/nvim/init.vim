@@ -4,58 +4,23 @@ filetype off                  " required
 
 let mapleader =","
 
-"if filereadable(expand("~/.vimrc_background"))
-"  let base16colorspace=256
-"  source ~/.vimrc_background
-"endif
+call plug#begin('~/.vim/plugged')
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'scrooloose/syntastic'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-surround'
+Plug 'neovimhaskell/haskell-vim', {'for': ['haskell', 'hs']}
+Plug 'dag/vim2hs', {'for': ['haskell', 'hs']}
+Plug 'tpope/vim-commentary'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'morhetz/gruvbox'
+Plug 'junegunn/goyo.vim'
+Plug 'jiangmiao/auto-pairs'
 
-"let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-"Syntastic
-Plugin 'vim-syntastic/syntastic'
-
-"Complete
-"Plugin 'valloric/youcompleteme'
-Plugin 'ervandew/supertab'
-
-"Displays which mode you are on
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-
-"GODS PLUGIN
-Plugin 'cohama/lexima.vim'
-Plugin 'tpope/vim-surround'
-
-"Haskell highlight
-Plugin 'neovimhaskell/haskell-vim', {'for': ['haskell', 'hs']}
-
-"Elixir highlight
-Plugin 'elixir-lang/vim-elixir'
-
-"i3 highlight
-Plugin 'potatoesmaster/i3-vim-syntax'
-
-"Fuzzy file finder
-Plugin 'kien/ctrlp.vim'
-Plugin 'powerline/fonts'
-
-Plugin 'morhetz/gruvbox'
-Plugin 'octol/vim-cpp-enhanced-highlight', {'for': ['cpp', 'c']}
-
-Plugin 'scrooloose/nerdtree'
-Plugin 'gyim/vim-boxdraw'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-fugitive'
-Plugin 'dag/vim2hs'
-Plugin 'cool.vim'
-Plugin 'drtom/fsharp-vim'
-
-call vundle#end()
+call plug#end()
 
 set bg=dark
 colorscheme gruvbox
@@ -64,6 +29,7 @@ filetype plugin indent on
 set termguicolors
 set number                  " Enable line numbers.
 set numberwidth=5           " width of numbers line (default on gvim is 4)
+set rnu                     " Set relative number
 set report=0                " Show all changes.
 set showmode                " Show the current mode.
 set showcmd                 " show partial command on last line of screen.
@@ -73,12 +39,15 @@ set title                   " Show the filename in the window title bar.
 set hlsearch
 set ignorecase              " Ignores case sensitive cases when searching
 set undofile
+set hidden                  " Change buffers without needing to save
+set updatetime=300          " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+                            " delays and poor user experience.
 
 set scrolloff=5             " Start scrolling n lines before horizontal
-"   border of window.
+                            "   border of window.
 set sidescrolloff=7         " Start scrolling n chars before end of screen.
 set sidescroll=1            " The minimal number of columns to scroll
-"   horizontally.
+                            "   horizontally.
 set wildmenu                " Hitting TAB in command mode will
 set wildchar=<TAB>          "   show possible completions.
 set wildmode=list:longest
@@ -89,7 +58,7 @@ set autoindent smartindent      " auto/smart indent
 set copyindent                  " copy previous indentation on auto indent
 set softtabstop=2               " Tab key results in # spaces
 set tabstop=2                   " Tab is # spaces
-set shiftwidth=2                " The # of spaces for indenting.
+set shiftwidth=4                " The # of spaces for indenting.
 set smarttab                    " At start of line, <Tab> inserts shift width
 
 set statusline+=%#warningmsg#
@@ -103,7 +72,13 @@ inoremap <C-v> <ESC>"+pa
 vnoremap <C-c> "+y
 vnoremap <C-x> "+d
 
-"Airline config
+" Providers needed to coc
+let g:python_host_prog = '/usr/bin/python'
+let g:python3_host_prog = '/usr/bin/python3'
+let g:loaded_ruby_provider = 0
+let g:loaded_node_provider = 0
+
+" Airline config
 let g:airline_theme='deus'
 let g:airline_powerline_fonts = 1
 let g:airline_section_z=''
@@ -121,8 +96,7 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:bufferline_echo = 0
 let g:airline#extensions#tabline#tab_nr_type = 1
 
-
-"Syntastic config
+" Syntastic config
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
@@ -137,17 +111,27 @@ map <leader>w :SyntasticCheck<CR>
 map <leader>e :SyntasticReset<CR>
 nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
 
-"Tabular
-let g:tabular_loaded = 1
 
-"Save with Ctrl-S
-noremap  <silent> <C-S>         :w<CR>
-vnoremap <silent> <C-S>         <ESC>:w<ESC><CR>
-inoremap <silent> <C-S>         <ESC>:w<CR>
+" Coc
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-" Quick quit command
-noremap <leader>q :quit<CR>
-noremap <leader>Q :qa!<CR>
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+            \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+nmap <silent> <Leader>gd <Plug>(coc-definition)
+nmap <silent> <Leader>gy <Plug>(coc-type-definition)
+nmap <silent> <Leader>gi <Plug>(coc-implementation)
+nmap <silent> <Leader>gr <Plug>(coc-references)
+
 
 " Automatically deletes all trailing whitespace on save.
 autocmd BufWritePre * %s/\s\+$//e
@@ -155,7 +139,7 @@ autocmd BufWritePre * %s/\s\+$//e
 " Keep terminals transparency
 hi Normal guibg=NONE ctermbg=NONE
 
-"  Scrolling tabs
+" Scrolling tabs
 map <leader>1 1gt
 map <leader>2 2gt
 map <leader>3 3gt
@@ -179,15 +163,14 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" NerdTree
-map <C-z> :NERDTreeToggle<CR>
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
+" fzf
+nnoremap <C-p>     :Files<CR>
+nnoremap <Leader>b :Buffers<CR>
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
+let $FZF_DEFAULT_OPTS='--reverse'
 
-
+" Goyo
+map <leader>f :Goyo \| :hi Normal guibg=NONE ctermbg=NONE <CR>
 
 " Unbind arrow keys
 noremap <Up> <Nop>
@@ -219,22 +202,7 @@ vnoremap <leader><Tab> <Esc>/<++><Enter>"_c4l
 map <leader><Tab> <Esc>/<++><Enter>"_c4l
 
 " Latex bindings
-autocmd FileType tex map <F10> :silent !pdflatex % && start %:r.pdf<CR>
-autocmd FileType tex inoremap ,em \emph{}<++><Esc>T{i
-autocmd FileType tex inoremap ,bf \textbf{}<++><Esc>T{i
-autocmd FileType tex inoremap ,it \textit{}<++><Esc>T{i
-
-
-" Define flex filetype
-augroup twig_ft
-  au!
-  autocmd BufNewFile,BufRead *.fl   set filetype=lex
-augroup END
-
-" Define prolog filetype
-augroup twig_ft
-  au!
-  autocmd BufNewFile,BufRead *.pl   set filetype=prolog
-augroup END
-
-
+" autocmd FileType tex map <F10> :silent !pdflatex % && start %:r.pdf<CR>
+" autocmd FileType tex inoremap ,em \emph{}<++><Esc>T{i
+" autocmd FileType tex inoremap ,bf \textbf{}<++><Esc>T{i
+" autocmd FileType tex inoremap ,it \textit{}<++><Esc>T{i
