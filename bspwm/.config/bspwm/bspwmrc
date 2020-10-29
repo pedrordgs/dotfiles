@@ -8,7 +8,7 @@ bspc monitor -d 1 2 3 4 5 6 7 8 9 10
 sxhkd &
 
 # Run polybar
-~/.config/polybar/launch.sh
+~/.config/polybar/launch.sh &
 
 bspc config border_width         3
 bspc config window_gap          15
@@ -25,16 +25,16 @@ bspc rule -a alsamixer state=floating
 
 # Should run on x profile
 dunst &
-touchpad &
+touchpad.sh &
 xset r rate 300 50 &
 nm-applet &
 picom -f &
-setxbkmap pt &
-feh --bg-scale ~/Pictures/bg.png
-setxkbmap -option caps:none
+setxkbmap pt &
+feh --bg-scale ~/Pictures/bg.png &
+setxkbmap -option caps:none &
 unclutter &
 
 # no swallow
 pgrep bspswallow || bspswallow &
 
-wmname LG3D
+wmname LG3D &

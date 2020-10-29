@@ -2,14 +2,13 @@ export ZSH="/home/pbr/.oh-my-zsh"
 
 ZSH_THEME="spaceship"
 
-plugins=(git)
+plugins=(
+    git
+    zsh-syntax-highlighting
+    zsh-autosuggestions
+)
 
 source $ZSH/oh-my-zsh.sh
-
-# Plugins
-
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # User configuration
 
@@ -50,11 +49,11 @@ alias tka='tmux kill-server'
 alias help='tldr'
 alias grep='grep --color=auto'
 
-alias sonarqube='~/Downloads/sonarqube-8.5.0.37579/bin/linux-x86-64/sonar.sh console'
+# Master's aliases
+alias master='cd ~/Masters'
+alias sonarqube='~/Downloads/sonarqube-8.5.1.38104/bin/linux-x86-64/sonar.sh console'
 alias electrum='java -jar ~/Downloads/electrum-2.1.rc5.jar'
 
-# Work alias
-alias dip='cd ~/work/dipcode'
 
 function weather() {
   curl 'wttr.in/~'${1:-Braga}'+'$2'?'${3:-0}
@@ -64,12 +63,6 @@ function weather() {
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
-
-
-export PATH=$PATH:~/.local/bin
-
-
-
 
 
 #enable vim mode on commmand line
