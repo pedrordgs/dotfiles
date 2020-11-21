@@ -58,7 +58,7 @@ set autoindent smartindent      " auto/smart indent
 set copyindent                  " copy previous indentation on auto indent
 set softtabstop=2               " Tab key results in # spaces
 set tabstop=2                   " Tab is # spaces
-set shiftwidth=4                " The # of spaces for indenting.
+set shiftwidth=2                " The # of spaces for indenting.
 set smarttab                    " At start of line, <Tab> inserts shift width
 
 set statusline+=%#warningmsg#
