@@ -1,0 +1,7 @@
+#!/bin/bash
+
+while [ $(xkblayout-state print "%s") != "pt" ]
+do
+    setxkbmap -layout pt &
+    setxkbmap -option caps:none &
+done

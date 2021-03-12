@@ -13,7 +13,6 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
-
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -29,6 +28,10 @@ source $ZSH/oh-my-zsh.sh
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
+#
+
+export LC_ALL=en_US.UTF-8
+export MANPAGER="nvim -c 'set ft=man' -"
 
 
 # Functional alias
@@ -40,6 +43,7 @@ alias st='speed-test'
 alias meteo=weather
 alias dot='cd ~/.dotfiles'
 alias ls='exa'
+alias la='ls -la'
 alias rservices='sudo systemctl list-units --type=service --state=running'
 alias vim='nvim'
 alias ts='tmux list-sessions'
@@ -51,8 +55,8 @@ alias grep='grep --color=auto'
 
 # Master's aliases
 alias master='cd ~/Masters'
-alias sonarqube='~/Downloads/sonarqube-8.5.1.38104/bin/linux-x86-64/sonar.sh console'
-alias electrum='java -jar ~/Downloads/electrum-2.1.rc5.jar'
+# alias sonarqube='~/Downloads/sonarqube-8.5.1.38104/bin/linux-x86-64/sonar.sh console'
+alias electrum='java -jar /opt/electrum/electrum-2.1.4.jar'
 
 
 function weather() {

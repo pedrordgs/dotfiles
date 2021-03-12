@@ -19,6 +19,10 @@ Plug 'junegunn/fzf.vim'
 Plug 'morhetz/gruvbox'
 Plug 'junegunn/goyo.vim'
 Plug 'jiangmiao/auto-pairs'
+Plug 'jremmen/vim-ripgrep'
+Plug 'alexeyignatiev/vim-dimacs'
+Plug 'bohlender/vim-smt2'
+
 
 call plug#end()
 
@@ -206,3 +210,9 @@ map <leader><Tab> <Esc>/<++><Enter>"_c4l
 " autocmd FileType tex inoremap ,em \emph{}<++><Esc>T{i
 " autocmd FileType tex inoremap ,bf \textbf{}<++><Esc>T{i
 " autocmd FileType tex inoremap ,it \textit{}<++><Esc>T{i
+"
+autocmd FileType dimacs inoremap ,or ∨
+autocmd FileType dimacs inoremap ,and ∧
+autocmd FileType dimacs inoremap ,no ¬
+autocmd FileType dimacs inoremap ,s →
+autocmd FileType dimacs inoremap ,eq ≡
